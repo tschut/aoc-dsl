@@ -1,9 +1,19 @@
 package nl.tiemenschut.aoc.lib
 
 sealed class SubmitResponse(private val responseText: String) {
-    class Correct(responseText: String) : SubmitResponse(responseText)
-    class Incorrect(responseText: String) : SubmitResponse(responseText)
-    class Unknown(responseText: String) : SubmitResponse(responseText)
+    class Correct(responseText: String) : SubmitResponse(responseText) {
+        override val name = "Correct 🥳"
+    }
 
-    override fun toString(): String = "${this::class}: $responseText"
+    class Incorrect(responseText: String) : SubmitResponse(responseText) {
+        override val name = "Incorrect!"
+    }
+
+    class Unknown(responseText: String) : SubmitResponse(responseText) {
+        override val name = "Unknown response!"
+    }
+
+    abstract val name: String
+
+    override fun toString(): String = "$name $responseText"
 }

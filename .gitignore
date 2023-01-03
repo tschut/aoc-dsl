@@ -7,3 +7,5 @@
 /y2015/build/classes/kotlin/main/
 /.idea/
 /.session
+/data/
+/lib/data
