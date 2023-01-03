@@ -39,6 +39,7 @@ private suspend fun HttpResponse.bodyToSubmissionResponse(): SubmitResponse {
     val response = bodyAsText().substringAfter("<article><p>").substringBefore("</p></article>")
 
     return when {
+        response.contains("Did you already complete it?") -> SubmitResponse.Duplicate(response)
         response.contains("???") -> SubmitResponse.Correct(response)
         response.contains("That's not the right answer.") -> SubmitResponse.Incorrect(response)
         else -> SubmitResponse.Unknown(response)

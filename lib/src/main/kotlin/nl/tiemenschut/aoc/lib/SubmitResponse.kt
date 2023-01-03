@@ -13,6 +13,10 @@ sealed class SubmitResponse(private val responseText: String) {
         override val name = "Unknown response!"
     }
 
+    class Duplicate(responseText: String) : SubmitResponse(responseText) {
+        override val name = "Duplicate!"
+    }
+
     abstract val name: String
 
     override fun toString(): String = "$name $responseText"
