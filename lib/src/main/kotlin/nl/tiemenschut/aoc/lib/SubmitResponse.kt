@@ -5,8 +5,8 @@ enum class ResponseStatus {
 }
 
 data class SubmitResponse(
-    private val status: ResponseStatus,
-    private val responseText: String
+    val status: ResponseStatus,
+    val responseText: String
 ) {
     override fun toString(): String = "$status $responseText"
 }

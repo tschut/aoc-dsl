@@ -5,6 +5,7 @@ val koinVersion = "3.2.2"
 
 plugins {
     kotlin("jvm") version "1.7.20"
+    kotlin("plugin.serialization") version "1.7.20"
     application
 }
 
@@ -18,6 +19,7 @@ repositories {
 dependencies {
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("com.marcinziolo:kotlin-wiremock:2.0.1")

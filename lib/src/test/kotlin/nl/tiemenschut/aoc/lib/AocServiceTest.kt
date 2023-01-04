@@ -3,6 +3,7 @@ package nl.tiemenschut.aoc.lib
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
+import nl.tiemenschut.aoc.lib.ResponseStatus.INCORRECT
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
@@ -54,6 +55,6 @@ class AocServiceTest {
                 )
         )
 
-        assertThat(service.submit(2023 day 11, "foobar")).isInstanceOf(SubmitResponse.Incorrect::class.java)
+        assertThat(service.submit(2023 day 11, 1, "foobar").status).isEqualTo(INCORRECT)
     }
 }

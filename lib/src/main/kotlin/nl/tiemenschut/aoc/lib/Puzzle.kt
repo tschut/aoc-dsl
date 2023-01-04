@@ -8,5 +8,5 @@ data class Puzzle(val year: Int, val day: Int) {
     val inputUrl = "$puzzleUrl/input"
     val inputFile = "$puzzleCache/input"
     val answerUrl = "$puzzleUrl/answer"
-    val answerDir = "$puzzleCache/answers"
+    val answerFile = "$puzzleCache/answers"
 }

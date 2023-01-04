@@ -9,6 +9,7 @@ class AoC {
     private lateinit var puzzle: Puzzle
     private val aocService = AocService(ROOT_URL)
     private val inputService = InputService(aocService)
+    private val submitService = SubmitService(aocService)
 
     fun puzzle(puzzle: () -> Puzzle) {
         this.puzzle = puzzle()
@@ -27,6 +28,6 @@ class AoC {
     private fun runSolver(level: Int, solver: PuzzleContext.(String) -> Unit) {
         val input = input()
 
-        PuzzleContext(inputService, aocService, puzzle, level).apply { solver(input) }
+        PuzzleContext(inputService, submitService, puzzle, level).apply { solver(input) }
     }
 }

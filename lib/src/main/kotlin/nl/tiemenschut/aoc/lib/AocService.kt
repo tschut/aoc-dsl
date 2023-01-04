@@ -1,6 +1,7 @@
 package nl.tiemenschut.aoc.lib
 
 import io.ktor.client.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -12,7 +13,11 @@ import kotlin.io.path.readLines
 class AocService(private val root: String) {
     private val session: String = Path(".session").readLines().first()
 
-    private fun <T> call(block: suspend HttpClient.() -> T): T = HttpClient().use { client ->
+    private fun <T> call(block: suspend HttpClient.() -> T): T = HttpClient {
+        install(UserAgent) {
+            agent = "Kotlin AoC DSL - https://github.com/tschut/aoc-dsl"
+        }
+    }.use { client ->
         runBlocking {
             client.block()
         }
@@ -25,13 +30,12 @@ class AocService(private val root: String) {
         }.bodyAsText()
     }
 
-    fun submit(puzzle: Puzzle, answer: String): SubmitResponse = call {
+    fun submit(puzzle: Puzzle, level: Int, answer: String): SubmitResponse = call {
         post {
             url(root + puzzle.answerUrl)
             cookie("session", session)
             contentType(ContentType.parse("application/x-www-form-urlencoded"))
-            userAgent("Kotlin AoC DSL - Not yet on Github")
-            setBody("""level=1&answer=$answer""")
+            setBody("""level=$level&answer=$answer""")
         }.bodyToSubmissionResponse()
     }
 }

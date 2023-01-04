@@ -15,5 +15,4 @@ class InputService(private val aocService: AocService) {
         createFile()
         writeText(input)
     }
-
 }
