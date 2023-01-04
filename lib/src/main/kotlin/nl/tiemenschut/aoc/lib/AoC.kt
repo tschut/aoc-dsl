@@ -14,16 +14,19 @@ class AoC {
         this.puzzle = puzzle()
     }
 
-    private fun load(): String = inputService.getInput(puzzle)
+    private fun input(): String = inputService.getInput(puzzle)
 
-    fun submit(answer: String) {
-        println("Submitting answer: $answer")
-        val response = aocService.submit(puzzle, answer)
-
-        println("Response: $response")
+    fun part1(solver: PuzzleContext.(String) -> Unit) {
+        runSolver(0, solver)
     }
 
-    fun part1(solver: (String) -> Unit) {
-        apply { solver(load()) }
+    fun part2(solver: PuzzleContext.(String) -> Unit) {
+        runSolver(1, solver)
+    }
+
+    private fun runSolver(level: Int, solver: PuzzleContext.(String) -> Unit) {
+        val input = input()
+
+        PuzzleContext(inputService, aocService, puzzle, level).apply { solver(input) }
     }
 }

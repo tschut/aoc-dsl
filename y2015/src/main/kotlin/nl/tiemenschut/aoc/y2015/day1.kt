@@ -16,6 +16,17 @@ fun main() {
 
             submit("$floor")
         }
+
+        // next step: create SubmitService that does caching for submissions
+//        part2 { input ->
+//            var floor = 0
+//            for (c in input) when (c) {
+//                '(' -> floor ++
+//                else -> floor --
+//            }
+//
+//            submit("$floor")
+//        }
     }
 }
 
