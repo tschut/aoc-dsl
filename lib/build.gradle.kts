@@ -1,19 +1,16 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 val ktorVersion: String = "2.2.1"
-val koinVersion = "3.2.2"
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm")
     kotlin("plugin.serialization") version "1.7.20"
-    application
+    `java-library`
+    `maven-publish`
+    id("net.researchgate.release") version "3.0.2"
 }
 
-group = "nl.tiemenschut"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 dependencies {
@@ -33,6 +30,16 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+publishing {
+    publications {
+        create<MavenPublication>(name = "aoc-dsl") {
+            from(components["java"])
+            groupId = "com.github.tschut"
+            artifactId = "aoc-dsl"
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
 }
