@@ -1,5 +1,8 @@
 package nl.tiemenschut.aoc.lib
 
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTime
+
 const val ROOT_URL = "https://adventofcode.com"
 const val CACHE_ROOT = "data"
 
@@ -17,17 +20,27 @@ class AoC {
 
     private fun input(): String = inputService.getInput(puzzle)
 
-    fun part1(solver: PuzzleContext.(String) -> Unit) {
-        runSolver(0, solver)
-    }
-
-    fun part2(solver: PuzzleContext.(String) -> Unit) {
+    fun part1(solver: PuzzleContext.(String) -> String) {
         runSolver(1, solver)
     }
 
-    private fun runSolver(level: Int, solver: PuzzleContext.(String) -> Unit) {
+    fun part2(solver: PuzzleContext.(String) -> String) {
+        runSolver(2, solver)
+    }
+
+    @OptIn(ExperimentalTime::class)
+    private fun runSolver(level: Int, solver: PuzzleContext.(String) -> String) {
         val input = input()
 
-        PuzzleContext(inputService, submitService, puzzle, level).apply { solver(input) }
+        var answer: String?
+        val context = PuzzleContext(inputService, submitService, puzzle, level)
+
+        val time = measureTime {
+            answer = context.run { solver(input) }
+        }
+
+        println("Answer for $puzzle part $level: $answer, calculated in $time.")
+
+        context.submit(answer!!)
     }
 }

@@ -1,9 +1,11 @@
 package nl.tiemenschut.aoc.lib
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import nl.tiemenschut.aoc.lib.ResponseStatus.TOO_RECENT
 import kotlin.io.path.*
 
 @Serializable
@@ -20,12 +22,19 @@ data class SubmitResponseDto(
 data class SubmitResponseCacheDto(val submissions: List<SubmitResponseDto>)
 
 class SubmitService(private val aocService: AocService) {
+    @OptIn(ExperimentalSerializationApi::class)
+    private val writer = Json {
+        prettyPrint = true
+        prettyPrintIndent = "  "
+    }
     private fun Puzzle.responseCacheFile() = Path(CACHE_ROOT + answerFile)
 
     fun submit(puzzle: Puzzle, level: Int, answer: String): SubmitResponse {
         return getSubmitFromCache(puzzle, level, answer)?.also {
             println("You submitted this answer before, not submitting it again!")
-        } ?: aocService.submit(puzzle, level, answer).also { put(puzzle, level, answer, it) }
+        } ?: aocService.submit(puzzle, level, answer).also {
+            if (it.status != TOO_RECENT) put(puzzle, level, answer, it)
+        }
     }
 
     private fun getSubmitFromCache(puzzle: Puzzle, level: Int, answer: String): SubmitResponse? =
@@ -44,7 +53,7 @@ class SubmitService(private val aocService: AocService) {
         puzzle.responseCacheFile().run {
             parent.createDirectories()
             toFile().createNewFile()
-            writeText(Json.encodeToString(content))
+            writeText(writer.encodeToString(content))
         }
     }
 

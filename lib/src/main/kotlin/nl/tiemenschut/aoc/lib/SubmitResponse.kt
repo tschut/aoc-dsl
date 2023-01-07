@@ -1,7 +1,7 @@
 package nl.tiemenschut.aoc.lib
 
 enum class ResponseStatus {
-    CORRECT, INCORRECT, UNKNOWN, DUPLICATE
+    CORRECT, INCORRECT, UNKNOWN, DUPLICATE, TOO_RECENT
 }
 
 data class SubmitResponse(

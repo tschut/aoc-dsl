@@ -4,14 +4,10 @@ import io.mockk.called
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import nl.tiemenschut.aoc.lib.ResponseStatus.CORRECT
-import nl.tiemenschut.aoc.lib.ResponseStatus.INCORRECT
+import nl.tiemenschut.aoc.lib.ResponseStatus.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import kotlin.io.path.Path
-import kotlin.io.path.createDirectories
-import kotlin.io.path.readText
-import kotlin.io.path.writeText
+import kotlin.io.path.*
 
 class SubmitServiceTest : TestBase() {
     private val aocService: AocService = mockk()
@@ -59,9 +55,29 @@ class SubmitServiceTest : TestBase() {
 
         assertThat(service.submit(puzzle, 2, "answer")).isEqualTo(SubmitResponse(CORRECT, "fullresponse"))
         assertThat(Path("data" + puzzle.answerFile).readText()).isEqualTo(
+            // language=JSON
             """
-            {"submissions":[{"level":2,"answer":"answer","responseStatus":"CORRECT","responseText":"fullresponse"}]}
+            {
+              "submissions": [
+                {
+                  "level": 2,
+                  "answer": "answer",
+                  "responseStatus": "CORRECT",
+                  "responseText": "fullresponse"
+                }
+              ]
+            }
         """.trimIndent()
         )
+    }
+
+    @Test
+    fun `should not save submission in cache if response it TOO_RECENT`() {
+        val puzzle = 2017 day 24
+
+        every { aocService.submit(puzzle, 2, "answer") }.returns(SubmitResponse(TOO_RECENT, "fullresponse"))
+
+        assertThat(service.submit(puzzle, 2, "answer")).isEqualTo(SubmitResponse(TOO_RECENT, "fullresponse"))
+        assertThat(Path("data" + puzzle.answerFile)).doesNotExist()
     }
 }

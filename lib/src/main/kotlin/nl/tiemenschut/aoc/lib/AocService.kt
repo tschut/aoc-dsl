@@ -44,9 +44,10 @@ private suspend fun HttpResponse.bodyToSubmissionResponse(): SubmitResponse {
     val response = bodyAsText().substringAfter("<article><p>").substringBefore("</p></article>")
 
     val status = when {
+        response.contains("You gave an answer too recently") -> TOO_RECENT
         response.contains("Did you already complete it?") -> DUPLICATE
-        response.contains("???") -> CORRECT
-        response.contains("That's not the right answer.") -> INCORRECT
+        response.contains("That's the right answer") -> CORRECT
+        response.contains("That's not the right answer") -> INCORRECT
         else -> UNKNOWN
     }
 

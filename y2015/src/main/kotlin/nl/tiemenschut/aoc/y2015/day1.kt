@@ -10,23 +10,26 @@ fun main() {
         part1 { input ->
             var floor = 0
             for (c in input) when (c) {
-                '(' -> floor ++
-                else -> floor --
+                '(' -> floor++
+                else -> floor--
             }
 
-            submit("$floor")
+            return@part1 "$floor"
         }
 
-        // next step: create SubmitService that does caching for submissions
-//        part2 { input ->
-//            var floor = 0
-//            for (c in input) when (c) {
-//                '(' -> floor ++
-//                else -> floor --
-//            }
-//
-//            submit("$floor")
-//        }
+        part2 { input ->
+            var floor = 0
+            input.forEachIndexed { index, c ->
+                when (c) {
+                    '(' -> floor++
+                    else -> floor--
+                }
+                if (floor < 0) {
+                    return@part2 "${index + 1}"
+                }
+            }
+            throw Exception()
+        }
     }
 }
 
