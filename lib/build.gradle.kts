@@ -1,16 +1,16 @@
 val ktorVersion: String = "2.2.1"
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm")
     kotlin("plugin.serialization") version "1.7.20"
     `java-library`
+    `maven-publish`
+    id("net.researchgate.release") version "3.0.2"
 }
 
-group = "nl.tiemenschut"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 dependencies {
@@ -28,4 +28,18 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>(name = "aoc-dsl") {
+            from(components["java"])
+            groupId = "com.github.tschut"
+            artifactId = "aoc-dsl"
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
 }
