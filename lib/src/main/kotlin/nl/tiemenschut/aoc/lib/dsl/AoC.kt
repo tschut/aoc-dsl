@@ -37,7 +37,7 @@ class AoC<T: Any>(private val parser: InputParser<T>) {
         val input = input()
 
         var answer: String?
-        val context = PuzzleContext(inputService, submitService, puzzle, level)
+        val context = PuzzleContext(submitService, puzzle, level)
 
         val time = measureTime {
             answer = context.run { solver(input) }.toString()

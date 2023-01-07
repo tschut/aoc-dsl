@@ -1,7 +1,6 @@
 package nl.tiemenschut.aoc.lib.dsl
 
 class PuzzleContext(
-    private val inputService: InputService,
     private val submitService: SubmitService,
     private val puzzle: Puzzle,
     private val level: Int
