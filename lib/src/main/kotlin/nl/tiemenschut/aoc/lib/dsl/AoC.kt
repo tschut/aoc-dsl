@@ -24,16 +24,16 @@ class AoC<T: Any>(private val parser: InputParser<T>) {
 
     private fun input(): T = inputService.getInput(puzzle).let { parser.parse(it) }
 
-    fun part1(solver: PuzzleContext.(T) -> Any) {
-        runSolver(1, solver)
+    fun part1(submit: Boolean = true, solver: PuzzleContext.(T) -> Any) {
+        runSolver(submit, 1, solver)
     }
 
-    fun part2(solver: PuzzleContext.(T) -> Any) {
-        runSolver(2, solver)
+    fun part2(submit: Boolean = true, solver: PuzzleContext.(T) -> Any) {
+        runSolver(submit, 2, solver)
     }
 
     @OptIn(ExperimentalTime::class)
-    private fun runSolver(level: Int, solver: PuzzleContext.(T) -> Any) {
+    private fun runSolver(submit: Boolean, level: Int, solver: PuzzleContext.(T) -> Any) {
         val input = input()
 
         var answer: String?
@@ -45,6 +45,6 @@ class AoC<T: Any>(private val parser: InputParser<T>) {
 
         println("Answer for $puzzle part $level: $answer, calculated in $time.")
 
-        context.submit(answer!!)
+        if (submit) context.submit(answer!!)
     }
 }

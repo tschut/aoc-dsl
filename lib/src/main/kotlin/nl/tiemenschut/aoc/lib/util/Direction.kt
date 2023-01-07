@@ -16,4 +16,14 @@ enum class Direction {
         LEFT -> UP
         RIGHT -> DOWN
     }
+
+    companion object {
+        fun fromChar(c: Char) = when (c) {
+            '^' -> UP
+            'v' -> DOWN
+            '<' -> LEFT
+            '>' -> RIGHT
+            else -> throw UnsupportedOperationException()
+        }
+    }
 }
