@@ -1,4 +1,4 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
 enum class ResponseStatus {
     CORRECT, INCORRECT, UNKNOWN, DUPLICATE, TOO_RECENT

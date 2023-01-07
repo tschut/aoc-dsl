@@ -1,12 +1,14 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
-import nl.tiemenschut.aoc.lib.parser.InputParser
+import nl.tiemenschut.aoc.lib.dsl.parser.InputParser
+import nl.tiemenschut.aoc.lib.dsl.parser.NoopParser
 import kotlin.time.ExperimentalTime
 import kotlin.time.measureTime
 
 const val ROOT_URL = "https://adventofcode.com"
 const val CACHE_ROOT = "data"
 
+fun aoc(lambda: AoC<String>.() -> Unit) = AoC(NoopParser).apply(lambda)
 fun <T: Any> aoc(parser: InputParser<T>, lambda: AoC<T>.() -> Unit) = AoC(parser).apply(lambda)
 
 class AoC<T: Any>(private val parser: InputParser<T>) {
@@ -22,23 +24,23 @@ class AoC<T: Any>(private val parser: InputParser<T>) {
 
     private fun input(): T = inputService.getInput(puzzle).let { parser.parse(it) }
 
-    fun part1(solver: PuzzleContext.(T) -> String) {
+    fun part1(solver: PuzzleContext.(T) -> Any) {
         runSolver(1, solver)
     }
 
-    fun part2(solver: PuzzleContext.(T) -> String) {
+    fun part2(solver: PuzzleContext.(T) -> Any) {
         runSolver(2, solver)
     }
 
     @OptIn(ExperimentalTime::class)
-    private fun runSolver(level: Int, solver: PuzzleContext.(T) -> String) {
+    private fun runSolver(level: Int, solver: PuzzleContext.(T) -> Any) {
         val input = input()
 
         var answer: String?
         val context = PuzzleContext(inputService, submitService, puzzle, level)
 
         val time = measureTime {
-            answer = context.run { solver(input) }
+            answer = context.run { solver(input) }.toString()
         }
 
         println("Answer for $puzzle part $level: $answer, calculated in $time.")

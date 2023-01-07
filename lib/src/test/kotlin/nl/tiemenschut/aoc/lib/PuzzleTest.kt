@@ -1,5 +1,7 @@
 package nl.tiemenschut.aoc.lib
 
+import nl.tiemenschut.aoc.lib.dsl.Puzzle
+import nl.tiemenschut.aoc.lib.dsl.day
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

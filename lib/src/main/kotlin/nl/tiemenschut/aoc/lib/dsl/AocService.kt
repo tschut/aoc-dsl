@@ -1,4 +1,4 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
 import io.ktor.client.*
 import io.ktor.client.plugins.*
@@ -6,7 +6,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
-import nl.tiemenschut.aoc.lib.ResponseStatus.*
+import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.*
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 
@@ -27,7 +27,7 @@ class AocService(private val root: String) {
         get {
             url(root + puzzle.inputUrl)
             cookie("session", session)
-        }.bodyAsText()
+        }.bodyAsText().trim()
     }
 
     fun submit(puzzle: Puzzle, level: Int, answer: String): SubmitResponse = call {

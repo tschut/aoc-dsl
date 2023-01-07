@@ -1,8 +1,8 @@
 package nl.tiemenschut.aoc.y2015
 
-import nl.tiemenschut.aoc.lib.aoc
-import nl.tiemenschut.aoc.lib.day
-import nl.tiemenschut.aoc.lib.parser.AsCharSequence
+import nl.tiemenschut.aoc.lib.dsl.aoc
+import nl.tiemenschut.aoc.lib.dsl.day
+import nl.tiemenschut.aoc.lib.dsl.parser.AsCharSequence
 
 fun main() {
     aoc(AsCharSequence) {

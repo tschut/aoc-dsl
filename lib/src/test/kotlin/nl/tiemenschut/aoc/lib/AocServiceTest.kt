@@ -3,7 +3,9 @@ package nl.tiemenschut.aoc.lib
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
-import nl.tiemenschut.aoc.lib.ResponseStatus.INCORRECT
+import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.INCORRECT
+import nl.tiemenschut.aoc.lib.dsl.AocService
+import nl.tiemenschut.aoc.lib.dsl.day
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll

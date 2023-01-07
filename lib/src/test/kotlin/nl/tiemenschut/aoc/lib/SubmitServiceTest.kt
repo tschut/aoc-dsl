@@ -4,7 +4,11 @@ import io.mockk.called
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import nl.tiemenschut.aoc.lib.ResponseStatus.*
+import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.*
+import nl.tiemenschut.aoc.lib.dsl.AocService
+import nl.tiemenschut.aoc.lib.dsl.SubmitResponse
+import nl.tiemenschut.aoc.lib.dsl.SubmitService
+import nl.tiemenschut.aoc.lib.dsl.day
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import kotlin.io.path.*

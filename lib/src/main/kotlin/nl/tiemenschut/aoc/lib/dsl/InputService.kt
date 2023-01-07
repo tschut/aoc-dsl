@@ -1,4 +1,4 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
 import kotlin.io.path.*
 

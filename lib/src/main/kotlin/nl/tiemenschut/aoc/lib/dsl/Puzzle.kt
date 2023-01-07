@@ -1,4 +1,4 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
 infix fun Int.day(day: Int) = Puzzle(this, day)
 

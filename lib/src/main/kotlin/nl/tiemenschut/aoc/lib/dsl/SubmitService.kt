@@ -1,11 +1,11 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import nl.tiemenschut.aoc.lib.ResponseStatus.TOO_RECENT
+import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.TOO_RECENT
 import kotlin.io.path.*
 
 @Serializable
