@@ -33,6 +33,16 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+publishing {
+    publications {
+        create<MavenPublication>(name = "aoc-dsl") {
+            from(components["java"])
+            groupId = "com.github.tschut"
+            artifactId = "aoc-dsl"
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
 }
