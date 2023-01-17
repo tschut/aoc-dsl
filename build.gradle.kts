@@ -38,7 +38,6 @@ tasks.getByName<Test>("test") {
 }
 
 group = "io.github.tschut"
-version = "0.2-SNAPSHOT"
 
 publishing {
     publications {
