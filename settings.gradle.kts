@@ -5,6 +5,3 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
-include("lib")
-include("y2015")
