@@ -7,7 +7,6 @@ plugins {
     `maven-publish`
     id("net.researchgate.release") version "3.0.2"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
-//    signing
 }
 
 kotlin {
@@ -39,7 +38,7 @@ tasks.getByName<Test>("test") {
 }
 
 group = "io.github.tschut"
-version = "0.1-SNAPSHOT"
+version = "0.2-SNAPSHOT"
 
 publishing {
     publications {
