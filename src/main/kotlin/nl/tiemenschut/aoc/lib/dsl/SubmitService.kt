@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.CORRECT
 import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.TOO_RECENT
 import kotlin.io.path.*
 
@@ -27,15 +28,25 @@ class SubmitService(private val aocService: AocService) {
         prettyPrint = true
         prettyPrintIndent = "  "
     }
+
     private fun Puzzle.responseCacheFile() = Path(CACHE_ROOT + answerFile)
 
     fun submit(puzzle: Puzzle, level: Int, answer: String): SubmitResponse {
+        hasCorrectAnswer(puzzle, level)?.let {
+            print("You already submitted a correct answer for this puzzle, it was: ${it.answer}.")
+            println(" Not submitting another answer.")
+            return it.toSubmitResponse()
+        }
+
         return getSubmitFromCache(puzzle, level, answer)?.also {
             println("You submitted this answer before, not submitting it again!")
         } ?: aocService.submit(puzzle, level, answer).also {
             if (it.status != TOO_RECENT) put(puzzle, level, answer, it)
         }
     }
+
+    private fun hasCorrectAnswer(puzzle: Puzzle, level: Int) =
+        readCache(puzzle).submissions.find { it.level == level && it.responseStatus == CORRECT }
 
     private fun getSubmitFromCache(puzzle: Puzzle, level: Int, answer: String): SubmitResponse? =
         readCache(puzzle).submissions
