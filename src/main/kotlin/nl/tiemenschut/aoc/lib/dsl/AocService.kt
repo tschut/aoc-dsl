@@ -7,11 +7,10 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
 import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.*
-import kotlin.io.path.Path
-import kotlin.io.path.readLines
 
 class AocService(private val root: String) {
-    private val session: String = Path(".session").readLines().first()
+    private val session = javaClass.classLoader.getResource(".session")?.readText()
+        ?: throw SessionInvalidException("Could not open .session resource.")
 
     private fun <T> call(block: suspend HttpClient.() -> T): T = HttpClient {
         install(UserAgent) {
