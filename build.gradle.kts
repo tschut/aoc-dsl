@@ -24,7 +24,7 @@ java {
 dependencies {
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 
     testImplementation("org.assertj:assertj-core:3.23.1")
     testImplementation("com.marcinziolo:kotlin-wiremock:2.0.1")
