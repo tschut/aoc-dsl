@@ -31,7 +31,7 @@ dependencies {
     testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
     testImplementation("io.mockk:mockk:1.13.3")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 }
 
 tasks.getByName<Test>("test") {
