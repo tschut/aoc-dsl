@@ -1,0 +1,27 @@
+on:
+  workflow_dispatch:
+    inputs:
+      updateStrategy:
+        description: 'Version bump to use'
+        required: true
+        default: 'Patch'
+        type: choice
+        options:
+        - Patch
+        - Minor
+        - Major
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Create release
+      run: ./gradlew release -Prelease.versionIncrementer=increment${{ inputs.updateStrategy }}
+    
