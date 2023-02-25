@@ -26,4 +26,11 @@ jobs:
         distribution: 'temurin'
     - name: Create release
       run: ./gradlew release -Prelease.versionIncrementer=increment${{ inputs.updateStrategy }}
+
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      name: publish
+      run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
     
