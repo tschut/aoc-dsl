@@ -31,6 +31,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      name: publish
+    - name: publish
       run: ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
     
