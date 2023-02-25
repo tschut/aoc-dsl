@@ -40,7 +40,7 @@ tasks.getByName<Test>("test") {
 
 scmVersion {
     tag {
-        prefix.set("aoc-dsl")
+        prefix.set("aoc-dsl-")
     }
 }
 
