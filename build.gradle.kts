@@ -27,7 +27,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 
     testImplementation("org.assertj:assertj-core:3.24.2")
-    testImplementation("com.marcinziolo:kotlin-wiremock:2.0.1")
+    testImplementation("com.marcinziolo:kotlin-wiremock:2.0.2")
     testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
     testImplementation("io.mockk:mockk:1.13.3")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
