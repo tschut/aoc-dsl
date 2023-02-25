@@ -5,7 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "1.7.20"
     `java-library`
     `maven-publish`
-    id("net.researchgate.release") version "3.0.2"
+    id("pl.allegro.tech.build.axion-release") version "1.14.0"
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
     signing
 }
@@ -38,8 +38,14 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
+scmVersion {
+    tag {
+        prefix.set("aoc-dsl")
+    }
+}
+
 group = "io.github.tschut"
-version = "0.0.2-SNAPSHOT"
+project.version = scmVersion.version
 
 publishing {
     publications {
