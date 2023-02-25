@@ -1,7 +1,7 @@
 package nl.tiemenschut.aoc.lib.dsl
 
 enum class ResponseStatus {
-    CORRECT, INCORRECT, UNKNOWN, DUPLICATE, TOO_RECENT
+    CORRECT, INCORRECT, UNKNOWN, DUPLICATE, TOO_RECENT, NOT_SUBMITTED
 }
 
 data class SubmitResponse(

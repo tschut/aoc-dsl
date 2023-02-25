@@ -5,8 +5,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.CORRECT
-import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.TOO_RECENT
+import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.*
 import kotlin.io.path.*
 
 @Serializable
@@ -35,7 +34,7 @@ class SubmitService(private val aocService: AocService) {
         hasCorrectAnswer(puzzle, level)?.let {
             print("You already submitted a correct answer for this puzzle, it was: ${it.answer}.")
             println(" Not submitting another answer.")
-            return it.toSubmitResponse()
+            return SubmitResponse(NOT_SUBMITTED, "Answer was not submitted to aoc for verification.")
         }
 
         return getSubmitFromCache(puzzle, level, answer)?.also {

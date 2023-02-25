@@ -18,6 +18,34 @@ class SubmitServiceTest : TestBase() {
     private val service = SubmitService(aocService)
 
     @Test
+    fun `should not submit if puzzle was solved correctly before`() {
+        val puzzle = 2020 day 10
+        Path("data" + puzzle.answerFile).run {
+            parent.createDirectories()
+            toFile().createNewFile()
+            //language=JSON
+            writeText(
+                """
+                {
+                  "submissions": [
+                    {
+                      "level": 2,
+                      "answer": "answer",
+                      "responseStatus": "CORRECT",
+                      "responseText": "fullresponse"
+                    }
+                  ]
+                }
+            """.trimIndent()
+            )
+
+            assertThat(service.submit(puzzle, 2, "yeah")).isEqualTo(SubmitResponse(NOT_SUBMITTED, "Answer was not submitted to aoc for verification."))
+
+            verify { aocService wasNot called }
+        }
+    }
+
+    @Test
     fun `should get submission from cache if it exists`() {
         val puzzle = 2020 day 10
         Path("data" + puzzle.answerFile).run {
@@ -37,7 +65,7 @@ class SubmitServiceTest : TestBase() {
                     {
                       "level": 2,
                       "answer": "answer",
-                      "responseStatus": "CORRECT",
+                      "responseStatus": "INCORRECT",
                       "responseText": "fullresponse"
                     }
                   ]
