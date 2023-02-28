@@ -39,5 +39,4 @@ jobs:
         echo "signing.password=$SIGNING_PASSWORD" >> ~/.gradle/gradle.properties
         echo "signing.secretKeyRingFile=$HOME/.gradle/secring.gpg" >> ~/.gradle/gradle.properties
         echo "$SIGNING_SECRING" | base64 -d > ~/.gradle/secring.gpg
-        ./gradlew publishToSonatype closeSonatypeStagingRepository
-  #        ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
+        ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
