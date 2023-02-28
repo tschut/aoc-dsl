@@ -1,8 +1,9 @@
 val ktorVersion: String = "2.2.1"
+val kotlinVersion: String = "1.7.20"
 
 plugins {
-    kotlin("jvm") version "1.7.20"
-    kotlin("plugin.serialization") version "1.7.20"
+    kotlin("jvm") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     `java-library`
     `maven-publish`
     id("pl.allegro.tech.build.axion-release") version "1.14.4"
