@@ -40,11 +40,10 @@ jobs:
         SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
         SIGNING_SECRING: ${{ secrets.SIGNING_SECRING }}
       run: |
-        printenv
-#        mkdir ~/.gradle
-#        echo "signing.keyId=${SIGNING_KEY_ID}" > ~/.gradle/gradle.properties
-#        echo "signing.password=${SIGNING_PASSWORD}" >> ~/.gradle/gradle.properties
-#        echo "signing.secretKeyRingFile=${HOME}/.gradle/secring.gpg" >> ~/.gradle/gradle.properties
-#        echo ${SIGNING_SECRING} | base64 -d > ~/.gradle/secring.gpg
-#        ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
+        mkdir ~/.gradle
+        echo "signing.keyId=$SIGNING_KEY_ID" > ~/.gradle/gradle.properties
+        echo "signing.password=$SIGNING_PASSWORD" >> ~/.gradle/gradle.properties
+        echo "signing.secretKeyRingFile=$HOME/.gradle/secring.gpg" >> ~/.gradle/gradle.properties
+        echo $SIGNING_SECRING | base64 -d > ~/.gradle/secring.gpg
+        ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
     
