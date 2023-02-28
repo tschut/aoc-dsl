@@ -6,7 +6,7 @@ plugins {
     `java-library`
     `maven-publish`
     id("pl.allegro.tech.build.axion-release") version "1.14.4"
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.2.0"
     signing
 }
 
