@@ -14,9 +14,8 @@ on:
         - Major
 
 jobs:
-  release:
+  release-and-publish:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
       with:
@@ -28,12 +27,6 @@ jobs:
         distribution: 'temurin'
     - name: Create release
       run: ./gradlew release -Prelease.versionIncrementer=increment${{ inputs.updateStrategy }}
-
-  publish:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
     - name: publish
       env:
         ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
@@ -48,5 +41,4 @@ jobs:
         echo "signing.secretKeyRingFile=$HOME/.gradle/secring.gpg" >> ~/.gradle/gradle.properties
         echo "$SIGNING_SECRING" | base64 -d > ~/.gradle/secring.gpg
         ./gradlew publishToSonatype closeSonatypeStagingRepository
-#        ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
-
+  #        ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
