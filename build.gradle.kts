@@ -1,7 +1,7 @@
 val ktorVersion: String = "2.2.1"
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.8.10"
     kotlin("plugin.serialization") version "1.7.20"
     `java-library`
     `maven-publish`
