@@ -1,11 +1,11 @@
 val ktorVersion: String = "2.2.1"
 
 plugins {
-    kotlin("jvm") version "1.8.10"
-    kotlin("plugin.serialization") version "1.8.10"
+    kotlin("jvm") version "1.8.21"
+    kotlin("plugin.serialization") version "1.8.21"
     `java-library`
     `maven-publish`
-    id("pl.allegro.tech.build.axion-release") version "1.14.4"
+    id("pl.allegro.tech.build.axion-release") version "1.15.1"
     id("io.github.gradle-nexus.publish-plugin") version "1.2.0"
     signing
 }
