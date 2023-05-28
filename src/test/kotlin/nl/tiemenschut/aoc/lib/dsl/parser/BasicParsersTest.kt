@@ -10,4 +10,15 @@ class BasicParsersTest {
 
         assertThat(AsCharSequence.parse(input).toList()).isEqualTo(input.toList())
     }
+
+    @Test
+    fun asListOfStringsTest() {
+        val input = """
+            first line
+            second line
+            third line
+        """.trimIndent()
+
+        assertThat(AsListOfStrings.parse(input)).isEqualTo(listOf("first line", "second line", "third line"))
+    }
 }
