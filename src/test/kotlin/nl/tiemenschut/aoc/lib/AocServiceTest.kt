@@ -3,10 +3,10 @@ package nl.tiemenschut.aoc.lib
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
-import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.INCORRECT
+import io.kotest.matchers.shouldBe
 import nl.tiemenschut.aoc.lib.dsl.AocService
+import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.INCORRECT
 import nl.tiemenschut.aoc.lib.dsl.day
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -39,7 +39,7 @@ class AocServiceTest {
             )
         )
 
-        assertThat(service.getInput(2023 day 10)).isEqualTo("this is the puzzle input")
+        service.getInput(2023 day 10) shouldBe ("this is the puzzle input")
     }
 
     @Test
@@ -57,6 +57,6 @@ class AocServiceTest {
                 )
         )
 
-        assertThat(service.submit(2023 day 11, 1, "foobar").status).isEqualTo(INCORRECT)
+        service.submit(2023 day 11, 1, "foobar").status shouldBe INCORRECT
     }
 }

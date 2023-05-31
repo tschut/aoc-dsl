@@ -1,5 +1,6 @@
 package nl.tiemenschut.aoc.lib
 
+import io.kotest.matchers.shouldBe
 import io.mockk.called
 import io.mockk.every
 import io.mockk.mockk
@@ -7,7 +8,6 @@ import io.mockk.verify
 import nl.tiemenschut.aoc.lib.dsl.AocService
 import nl.tiemenschut.aoc.lib.dsl.InputService
 import nl.tiemenschut.aoc.lib.dsl.day
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectories
@@ -27,7 +27,7 @@ class InputServiceTest : TestBase() {
             writeText("I'm your puzzle input")
         }
 
-        assertThat(service.getInput(puzzle)).isEqualTo("I'm your puzzle input")
+        service.getInput(puzzle) shouldBe "I'm your puzzle input"
         verify { aocService wasNot called }
     }
 
@@ -36,7 +36,7 @@ class InputServiceTest : TestBase() {
         val puzzle = 2020 day 10
         every { aocService.getInput(puzzle) }.returns("puzzle input")
 
-        assertThat(service.getInput(puzzle)).isEqualTo("puzzle input")
-        assertThat(Path("data" + puzzle.inputFile).readText()).isEqualTo("puzzle input")
+        service.getInput(puzzle) shouldBe "puzzle input"
+        Path("data" + puzzle.inputFile).readText() shouldBe "puzzle input"
     }
 }

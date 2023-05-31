@@ -1,6 +1,6 @@
 package nl.tiemenschut.aoc.lib.dsl.parser
 
-import org.assertj.core.api.Assertions.assertThat
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class BasicParsersTest {
@@ -8,7 +8,7 @@ class BasicParsersTest {
     fun asCharSequenceTest() {
         val input = "inputstring"
 
-        assertThat(AsCharSequence.parse(input).toList()).isEqualTo(input.toList())
+        AsCharSequence.parse(input).toList() shouldBe input.toList()
     }
 
     @Test
@@ -19,6 +19,6 @@ class BasicParsersTest {
             third line
         """.trimIndent()
 
-        assertThat(AsListOfStrings.parse(input)).isEqualTo(listOf("first line", "second line", "third line"))
+        AsListOfStrings.parse(input) shouldBe listOf("first line", "second line", "third line")
     }
 }
