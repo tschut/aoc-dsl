@@ -1,6 +1,21 @@
 package nl.tiemenschut.aoc.lib.util.points
 
-class PointIntProgression(
+operator fun PointInt.rangeTo(other: PointInt): PointIntRange = PointIntRange(this, other)
+
+class PointIntRange(
+    start: PointInt,
+    endInclusive: PointInt,
+) : PointIntProgression(start, endInclusive), ClosedRange<PointInt> {
+    override val start: PointInt get() = first
+    override val endInclusive get() = last
+
+    override fun equals(other: Any?): Boolean =
+        other is PointIntRange && (isEmpty() && other.isEmpty() || first == other.first && last == other.last)
+
+    override fun hashCode(): Int = if (isEmpty()) -1 else (31 * first.hashCode() + last.hashCode())
+}
+
+open class PointIntProgression(
     start: PointInt,
     endInclusive: PointInt,
 ) : Iterable<Point<Int>> {

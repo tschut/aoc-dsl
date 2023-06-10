@@ -2,7 +2,7 @@ package nl.tiemenschut.aoc.lib.util.points
 
 import nl.tiemenschut.aoc.lib.util.Direction
 
-interface Point<T> {
+interface Point<T> : Comparable<Point<T>> {
     val x: T
     val y: T
 

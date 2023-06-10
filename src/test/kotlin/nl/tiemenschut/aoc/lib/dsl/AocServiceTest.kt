@@ -1,12 +1,10 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration
 import io.kotest.matchers.shouldBe
-import nl.tiemenschut.aoc.lib.dsl.AocService
 import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.INCORRECT
-import nl.tiemenschut.aoc.lib.dsl.day
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test

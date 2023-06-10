@@ -26,15 +26,16 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 
+
+    testImplementation("io.kotest:kotest-framework-datatest:5.6.2")
+    testImplementation("io.kotest:kotest-runner-junit5:5.6.2")
     testImplementation("io.kotest:kotest-assertions-core:5.6.2")
     testImplementation("com.marcinziolo:kotlin-wiremock:2.0.1")
     testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
     testImplementation("io.mockk:mockk:1.13.5")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 }
 
-tasks.getByName<Test>("test") {
+tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 

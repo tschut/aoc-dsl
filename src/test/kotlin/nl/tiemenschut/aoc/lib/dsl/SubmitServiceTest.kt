@@ -1,4 +1,4 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
 import io.kotest.matchers.paths.shouldNotExist
 import io.kotest.matchers.shouldBe
@@ -6,11 +6,8 @@ import io.mockk.called
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import nl.tiemenschut.aoc.lib.dsl.AocService
+import nl.tiemenschut.aoc.lib.TestBase
 import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.*
-import nl.tiemenschut.aoc.lib.dsl.SubmitResponse
-import nl.tiemenschut.aoc.lib.dsl.SubmitService
-import nl.tiemenschut.aoc.lib.dsl.day
 import org.junit.jupiter.api.Test
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectories

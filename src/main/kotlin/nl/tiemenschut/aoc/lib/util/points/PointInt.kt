@@ -8,6 +8,12 @@ data class PointInt(override val x: Int, override val y: Int) : Point<Int> {
     override val DOWN: PointInt by lazy { PointInt(0, 1) }
     override val RIGHT: PointInt by lazy { PointInt(1, 0) }
 
+    override fun compareTo(other: Point<Int>): Int = when {
+        x == other.x && y == other.y -> 0
+        x >= other.x && y >= other.y -> 1
+        else -> -1
+    }
+
     override fun plus(other: Point<Int>) = this.x + other.x by this.y + other.y
 
     override fun minus(other: Point<Int>) = this.x - other.x by this.y - other.y

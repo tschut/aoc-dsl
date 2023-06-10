@@ -1,8 +1,6 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
 import io.kotest.matchers.shouldBe
-import nl.tiemenschut.aoc.lib.dsl.Puzzle
-import nl.tiemenschut.aoc.lib.dsl.day
 import org.junit.jupiter.api.Test
 
 class PuzzleTest {
