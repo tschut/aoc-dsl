@@ -1,7 +1,10 @@
 package nl.tiemenschut.aoc.lib.util
 
-infix fun Point.by(z: Long) = Point3D(this.x, this.y, z)
-infix fun Point.by(z: Int) = Point3D(this.x, this.y, z.toLong())
+import nl.tiemenschut.aoc.lib.util.points.PointLong
+import nl.tiemenschut.aoc.lib.util.points.by
+
+infix fun PointLong.by(z: Long) = Point3D(this.x, this.y, z)
+infix fun PointLong.by(z: Int) = Point3D(this.x, this.y, z.toLong())
 
 data class Point3D(val x: Long, val y: Long, val z: Long) {
     fun moved(x1: Long, y1: Long, z1: Long) = (x + x1) by (y + y1) by (z + z1)

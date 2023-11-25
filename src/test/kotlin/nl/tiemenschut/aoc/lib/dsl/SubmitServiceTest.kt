@@ -1,17 +1,18 @@
-package nl.tiemenschut.aoc.lib
+package nl.tiemenschut.aoc.lib.dsl
 
+import io.kotest.matchers.paths.shouldNotExist
+import io.kotest.matchers.shouldBe
 import io.mockk.called
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import nl.tiemenschut.aoc.lib.TestBase
 import nl.tiemenschut.aoc.lib.dsl.ResponseStatus.*
-import nl.tiemenschut.aoc.lib.dsl.AocService
-import nl.tiemenschut.aoc.lib.dsl.SubmitResponse
-import nl.tiemenschut.aoc.lib.dsl.SubmitService
-import nl.tiemenschut.aoc.lib.dsl.day
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import kotlin.io.path.*
+import kotlin.io.path.Path
+import kotlin.io.path.createDirectories
+import kotlin.io.path.readText
+import kotlin.io.path.writeText
 
 class SubmitServiceTest : TestBase() {
     private val aocService: AocService = mockk()
@@ -39,7 +40,10 @@ class SubmitServiceTest : TestBase() {
             """.trimIndent()
             )
 
-            assertThat(service.submit(puzzle, 2, "yeah")).isEqualTo(SubmitResponse(NOT_SUBMITTED, "Answer was not submitted to aoc for verification."))
+            service.submit(puzzle, 2, "yeah") shouldBe SubmitResponse(
+                NOT_SUBMITTED,
+                "Answer was not submitted to aoc for verification."
+            )
 
             verify { aocService wasNot called }
         }
@@ -73,7 +77,7 @@ class SubmitServiceTest : TestBase() {
             """.trimIndent()
             )
 
-            assertThat(service.submit(puzzle, 2, "yeah")).isEqualTo(SubmitResponse(INCORRECT, "krak"))
+            service.submit(puzzle, 2, "yeah") shouldBe SubmitResponse(INCORRECT, "krak")
 
             verify { aocService wasNot called }
         }
@@ -85,10 +89,10 @@ class SubmitServiceTest : TestBase() {
 
         every { aocService.submit(puzzle, 2, "answer") }.returns(SubmitResponse(CORRECT, "fullresponse"))
 
-        assertThat(service.submit(puzzle, 2, "answer")).isEqualTo(SubmitResponse(CORRECT, "fullresponse"))
-        assertThat(Path("data" + puzzle.answerFile).readText()).isEqualTo(
-            // language=JSON
-            """
+        service.submit(puzzle, 2, "answer") shouldBe SubmitResponse(CORRECT, "fullresponse")
+        Path("data" + puzzle.answerFile).readText() shouldBe
+                // language=JSON
+                """
             {
               "submissions": [
                 {
@@ -100,7 +104,6 @@ class SubmitServiceTest : TestBase() {
               ]
             }
         """.trimIndent()
-        )
     }
 
     @Test
@@ -109,7 +112,7 @@ class SubmitServiceTest : TestBase() {
 
         every { aocService.submit(puzzle, 2, "answer") }.returns(SubmitResponse(TOO_RECENT, "fullresponse"))
 
-        assertThat(service.submit(puzzle, 2, "answer")).isEqualTo(SubmitResponse(TOO_RECENT, "fullresponse"))
-        assertThat(Path("data" + puzzle.answerFile)).doesNotExist()
+        service.submit(puzzle, 2, "answer") shouldBe SubmitResponse(TOO_RECENT, "fullresponse")
+        Path("data" + puzzle.answerFile).shouldNotExist()
     }
 }
