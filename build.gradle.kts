@@ -1,8 +1,8 @@
 val ktorVersion: String = "2.2.1"
 
 plugins {
-    kotlin("jvm") version "1.8.21"
-    kotlin("plugin.serialization") version "1.9.0"
+    kotlin("jvm") version "1.9.20"
+    kotlin("plugin.serialization") version "1.9.20"
     `java-library`
     `maven-publish`
     id("pl.allegro.tech.build.axion-release") version "1.15.1"
@@ -12,7 +12,7 @@ plugins {
 
 kotlin {
     jvmToolchain {
-        this.languageVersion.set(JavaLanguageVersion.of(19))
+        this.languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
