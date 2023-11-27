@@ -28,7 +28,7 @@ dependencies {
 
 
     testImplementation("io.kotest:kotest-framework-datatest:5.6.2")
-    testImplementation("io.kotest:kotest-runner-junit5:5.6.2")
+    testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
     testImplementation("io.kotest:kotest-assertions-core:5.6.2")
     testImplementation("com.marcinziolo:kotlin-wiremock:2.0.1")
     testImplementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
