@@ -32,7 +32,6 @@ class AoC<T: Any>(private val parser: InputParser<T>) {
         runSolver(submit, 2, solver)
     }
 
-    @OptIn(ExperimentalTime::class)
     private fun runSolver(submit: Boolean, level: Int, solver: PuzzleContext.(T) -> Any) {
         val input = input()
 
