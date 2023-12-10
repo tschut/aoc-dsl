@@ -19,6 +19,17 @@ interface Point<T> : Comparable<Point<T>> {
     fun up(): Point<T> = this - DOWN
     fun down(): Point<T> = this + DOWN
 
+    fun surrounding() = listOf(
+        this - RIGHT - DOWN,
+        this - RIGHT,
+        this - RIGHT + DOWN,
+        this + RIGHT - DOWN,
+        this + RIGHT,
+        this + RIGHT + DOWN,
+        this - DOWN,
+        this + DOWN,
+    )
+
     fun moved(direction: Direction) = when (direction) {
         Direction.DOWN -> down()
         Direction.UP -> up()
